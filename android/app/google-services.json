@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830369899680",
+    "project_id": "mypetinfo-day",
+    "storage_bucket": "mypetinfo-day.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830369899680:android:3bf1fb905cb6e33ce895c5",
+        "android_client_info": {
+          "package_name": "com.example.my_pet_info"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjG1qQ8L_pLDWa1P_wdJz63XjJebmdP1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
