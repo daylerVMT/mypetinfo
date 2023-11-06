@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Firebase',
+      title: 'My Pet Info',
       routes: {
         '/': (context) => const SplashScreen(
           // Here, you can decide whether to show the LoginPage or HomePage based on user authentication

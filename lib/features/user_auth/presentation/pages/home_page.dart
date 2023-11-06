@@ -15,24 +15,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<String> items = [
     "Home",
-    "Explore",
-    "Search",
-    "Feed",
-    "Posts",
-    "Activity",
-    "Setting",
+    "Register",
+    "Alerts",
+    "Maps",
     "Profile",
   ];
 
   /// List of body icon
   List<IconData> icons = [
     Icons.home,
-    Icons.explore,
-    Icons.search,
-    Icons.feed,
-    Icons.post_add,
-    Icons.local_activity,
-    Icons.settings,
+    Icons.library_add,
+    Icons.add_alert,
+    Icons.gps_fixed,
     Icons.person
   ];
   int current = 0;
@@ -105,33 +99,22 @@ class _HomePageState extends State<HomePage> {
                                   : BorderRadius.circular(7),
                               border: current == index
                                   ? Border.all(
-                                      color: Colors.deepPurpleAccent,
+                                      color: Colors.teal,
                                       width: 2.5)
                                   : null,
                             ),
                             child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    icons[index],
-                                    size: current == index ? 23 : 20,
-                                    color: current == index
-                                        ? Colors.black
-                                        : Colors.grey.shade400,
-                                  ),
-                                  Text(
-                                    items[index],
-                                    style: GoogleFonts.ubuntu(
-                                      fontWeight: FontWeight.w500,
-                                      color: current == index
-                                          ? Colors.black
-                                          : Colors.grey.shade400,
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                items[index],
+                                style: GoogleFonts.ubuntu(
+                                  fontSize: 15,
+                                  color: current == index
+                                    ? Colors.teal
+                                      : Colors.white60,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                            ),
+                            )
                           ),
                         ),
                         Visibility(
@@ -140,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                             width: 5,
                             height: 5,
                             decoration: const BoxDecoration(
-                                color: Colors.deepPurpleAccent,
+                                color: Colors.teal,
                                 shape: BoxShape.circle),
                           ),
                         )
@@ -165,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                       Icon(
                         icons[current],
                         size: 200,
-                        color: Colors.deepPurpleAccent,
+                        color: Colors.teal,
                       ),
                       const SizedBox(
                         height: 10,
@@ -175,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                         style: GoogleFonts.ubuntu(
                             fontWeight: FontWeight.w500,
                             fontSize: 30,
-                            color: Colors.deepPurpleAccent),
+                            color: Colors.teal),
                       ),
                     ],
                   );
