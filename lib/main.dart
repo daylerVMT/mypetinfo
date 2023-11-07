@@ -6,6 +6,8 @@ import 'package:my_pet_info/features/app/splash_screen/splash_screen.dart';
 import 'package:my_pet_info/features/user_auth/presentation/pages/home_page.dart';
 import 'package:my_pet_info/features/user_auth/presentation/pages/login_page.dart';
 import 'package:my_pet_info/features/user_auth/presentation/pages/sign_up_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +24,10 @@ Future main() async {
       ),
     );
   } else {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
   }
   runApp(const MyApp());
 }

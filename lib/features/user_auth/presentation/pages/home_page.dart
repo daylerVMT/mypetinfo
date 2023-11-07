@@ -2,8 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../ui/page1.dart';
+import '../ui/registro/mascota_screen.dart';
+import '../ui/page3.dart';
+import '../ui/page4.dart';
+import '../ui/page5.dart';
 import '../../../../global/common/toast.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,162 +17,60 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  List<String> items = [
-    "Home",
-    "Register",
-    "Alerts",
-    "Maps",
-    "Profile",
-  ];
-
-  /// List of body icon
-  List<IconData> icons = [
-    Icons.home,
-    Icons.library_add,
-    Icons.add_alert,
-    Icons.gps_fixed,
-    Icons.person
-  ];
-  int current = 0;
-
-  PageController pageController = PageController();
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin{
+  late TabController controller;
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.green,
-        title: Column(
-          children: [
-            Text(
-              "MyPetInfo",
-              style: GoogleFonts.ubuntu(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
-              "Home Page",
-              style: GoogleFonts.ubuntu(
-                fontSize: 15,
-                color: Colors.white60,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        margin: const EdgeInsets.all(5),
-        child: Column(
-          children: [
-            /// Tab Bar
-            SizedBox(
-              width: double.infinity,
-              height: 80,
-              child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: items.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (ctx, index) {
-                    return Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              current = index;
-                            });
-                            pageController.animateToPage(
-                              current,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.ease,
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            margin: const EdgeInsets.all(5),
-                            width: 100,
-                            height: 55,
-                            decoration: BoxDecoration(
-                              color: current == index
-                                  ? Colors.white70
-                                  : Colors.white54,
-                              borderRadius: current == index
-                                  ? BorderRadius.circular(12)
-                                  : BorderRadius.circular(7),
-                              border: current == index
-                                  ? Border.all(
-                                      color: Colors.teal,
-                                      width: 2.5)
-                                  : null,
-                            ),
-                            child: Center(
-                              child: Text(
-                                items[index],
-                                style: GoogleFonts.ubuntu(
-                                  fontSize: 15,
-                                  color: current == index
-                                    ? Colors.teal
-                                      : Colors.white60,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            )
-                          ),
-                        ),
-                        Visibility(
-                          visible: current == index,
-                          child: Container(
-                            width: 5,
-                            height: 5,
-                            decoration: const BoxDecoration(
-                                color: Colors.teal,
-                                shape: BoxShape.circle),
-                          ),
-                        )
-                      ],
-                    );
-                  }),
-            ),
+    void initState() {
+      super.initState();
+      controller = TabController(length: 5, vsync: this);
+      controller.addListener(() {
+        setState(() {});
+      });
+    }
 
-            /// MAIN BODY
-            Container(
-              margin: const EdgeInsets.only(top: 30),
-              width: double.infinity,
-              height: 550,
-              child: PageView.builder(
-                itemCount: icons.length,
-                controller: pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        icons[current],
-                        size: 200,
-                        color: Colors.teal,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "${items[current]} Tab Content",
-                        style: GoogleFonts.ubuntu(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 30,
-                            color: Colors.teal),
-                      ),
-                    ],
-                  );
-                },
-              ),
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal ,
+        title: const Text("HOME PAGE"),
+        centerTitle: true,
+        bottom: TabBar(
+          indicatorColor: Colors.teal,
+          controller: controller,
+          labelStyle: TextStyle(fontSize: 22),
+          unselectedLabelColor: Colors.black,
+          unselectedLabelStyle: TextStyle(fontSize: 15),
+          tabs: [
+            Row(
+              children:[
+                Text("News"),
+                SizedBox(height: 5),
+              ],
             ),
+            Text("Register"),
+            Text("Alerts"),
+            Text("Maps"),
+            Text("Perfil"),
           ],
         ),
       ),
-    );
-  }
+      body: TabBarView(
+        controller: controller,
+        children: [
+          Pagina1(),
+          Pagina2(),
+          Pagina3(),
+          Pagina4(),
+          Pagina5(),
+          ],
+        ),
+      );
 }
+
